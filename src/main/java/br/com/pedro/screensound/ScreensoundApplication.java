@@ -19,6 +19,6 @@ public class ScreensoundApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Principal principal = new Principal(repositorioArtista);
-
+		principal.mainMenu();
 	}
 }
