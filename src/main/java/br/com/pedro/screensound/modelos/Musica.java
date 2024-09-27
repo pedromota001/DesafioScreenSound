@@ -42,4 +42,11 @@ public class Musica {
     public void setArtista(Artista artista) {
         this.artista = artista;
     }
+
+    @Override
+    public String toString() {
+        return "titulo='" + titulo + '\'' +
+                ", artista=" + artista +
+                '}';
+    }
 }

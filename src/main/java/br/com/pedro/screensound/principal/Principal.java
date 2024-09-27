@@ -6,6 +6,7 @@ import br.com.pedro.screensound.modelos.TipoCategoria;
 import br.com.pedro.screensound.repository.IArtistaRepository;
 
 import java.io.Serial;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -42,10 +43,10 @@ public class Principal {
                     cadastrarMusicas();
                     break;
                 case 3:
-                    //listaMusicas();
+                    listaMusicas();
                     break;
                 case 4:
-                    //buscarMusicasPorArtistas();
+                    buscarMusicasPorArtistas();
                     break;
                 case 0:
                     System.out.println("Encerrando");
@@ -84,6 +85,28 @@ public class Principal {
         }
         else{
             System.out.println("Artista nao encontrado no banco");
+        }
+    }
+    private void listaMusicas(){
+        System.out.println("Musicas cadastradas: ");
+        List<Artista> listaMusicas = repositorioArtista.findAll();
+        listaMusicas.forEach(a -> a.getListaMusicas()
+                .forEach(System.out::println));
+
+    }
+    private void buscarMusicasPorArtistas(){
+        System.out.println("Digite o nome do artista dono da musica: ");
+        var nomeArtista = leitura.nextLine();
+        Optional<Artista> artista = repositorioArtista.findByNomeContainingIgnoreCase(nomeArtista);
+        if(artista.isPresent()){
+            List<Musica> musicasArtista = repositorioArtista.buscarMusicasArtista(nomeArtista);
+            System.out.println("Musicas do artista " + nomeArtista);
+            musicasArtista.forEach(m ->
+                    System.out.println("Titulo: " + m.getTitulo() + ", Nome artista: " + m.getArtista().getNome() + ", Id do artista: " +
+                            m.getArtista().getId()));
+        }
+        else{
+            System.out.println("Artista nao cadastrado no sistema");
         }
     }
 }

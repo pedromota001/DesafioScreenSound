@@ -57,4 +57,11 @@ public class Artista {
     public void setListaMusicas(List<Musica> listaMusicas) {
         this.listaMusicas = listaMusicas;
     }
+
+    @Override
+    public String toString() {
+        return "nome='" + nome + '\'' +
+                ", tipo=" + tipo +
+                '}';
+    }
 }
